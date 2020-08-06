@@ -1,7 +1,7 @@
 SKIPUNZIP=0
 
-if [ -f "/etc/apns-conf.xml" ]; then
-	APNCONFDIR="/etc"
+if [ -f "/system/etc/apns-conf.xml" ]; then
+	APNCONFDIR="/system/etc"
 elif [ -f "/vendor/etc/apns-conf.xml" ]; then
 	APNCONFDIR="/system/vendor/etc"
 elif [ -f "/product/etc/apns-conf.xml" ]; then
