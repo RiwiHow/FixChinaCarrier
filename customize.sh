@@ -11,11 +11,11 @@ elif [ -f "/vendor/etc/apns-conf.xml" ]; then
 elif [ -f "/product/etc/apns-conf.xml" ]; then
 	APNCONFDIR="/system/product/etc"
 else
-	abort "Unsupported system!"
+	abort "- Unsupported system!"
 fi
 
-ui_print "It seems your APN conf at $APNCONFDIR"
-ui_print "If there is some wrong, please report"
+ui_print "- It seems that your APN conf is at $APNCONFDIR"
+ui_print "- If there is some wrong, please report"
 unzip -qjo "$ZIPFILE" 'APN/*' -d $MODPATH >&2
 mkdir -p $MODPATH$APNCONFDIR
 cp $MODPATH/apns-conf.xml $MODPATH$APNCONFDIR
