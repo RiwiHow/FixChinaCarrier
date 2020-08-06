@@ -1,6 +1,6 @@
 SKIPUNZIP=0
 
-ui_print "- Unziping module"
+ui_print "- Unzip files..."
 
 if [ -f "/etc/apns-conf.xml" ]; then
 	APNCONFDIR="/etc"
@@ -13,12 +13,18 @@ else
 fi
 
 ui_print "- It seems that your APN conf is at $APNCONFDIR"
-ui_print "- If there is some wrong, please report"
+ui_print "- If there are something wrong, please report"
 [[ ! -f "$MODPATH/apns-conf.xml" ]] && unzip -qjo "$ZIPFILE" 'APN/*' -d $MODPATH >&2
 mkdir -p $MODPATH$APNCONFDIR
 [[ -f "$MODPATH/APN/apns-conf.xml" ]] && mv -f $MODPATH/APN/apns-conf.xml $MODPATH/apns-conf.xml
 mv -f $MODPATH/apns-conf.xml $MODPATH$APNCONFDIR
 [[ -f "$MODPATH$APNCONFDIR/apns-conf.xml" ]] && rm -rf $MODPATH/APN
+
+# Remove stuffs that don't belong to modules
+rm -rf \
+$MODPATH/system/placeholder $MODPATH/customize.sh \
+$MODPATH/*.md $MODPATH/.git* $MODPATH/LICENSE $MODPATH/Doc 2>/dev/null
+
 # Set 
   set_perm_recursive $MODPATH 0 0 0755 0644
 
