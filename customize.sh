@@ -9,7 +9,7 @@ elif [ -f "/vendor/etc/apns-conf.xml" ]; then
 elif [ -f "/product/etc/apns-conf.xml" ]; then
 	APNCONFDIR="/system/product/etc"
 else
-	abort "- Unsupported system!"
+	abort "- This operating system is not supported, Please report to the developer."
 fi
 
 ui_print "- It seems that your APN conf is at $APNCONFDIR"
@@ -18,7 +18,7 @@ ui_print "- If there is some wrong, please report"
 mkdir -p $MODPATH$APNCONFDIR
 [[ -f "$MODPATH/APN/apns-conf.xml" ]] && mv -f $MODPATH/APN/apns-conf.xml $MODPATH/apns-conf.xml
 mv -f $MODPATH/apns-conf.xml $MODPATH$APNCONFDIR
-
+[[ -f "$MODPATH$APNCONFDIR/apns-conf.xml" ]] && rm -rf $MODPATH/APN
 # Set 
   set_perm_recursive $MODPATH 0 0 0755 0644
 
