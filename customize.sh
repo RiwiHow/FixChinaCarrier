@@ -1,7 +1,5 @@
 SKIPUNZIP=0
 
-ui_print "- Unziping files..."
-
 if [ -f "/etc/apns-conf.xml" ]; then
 	APNCONFDIR="/etc"
 elif [ -f "/vendor/etc/apns-conf.xml" ]; then
