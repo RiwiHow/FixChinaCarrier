@@ -9,7 +9,7 @@ elif [ -f "/vendor/etc/apns-conf.xml" ]; then
 elif [ -f "/product/etc/apns-conf.xml" ]; then
 	APNCONFDIR="/system/product/etc"
 else
-	abort "- Unsupported system!"
+	abort "- This operating system is not supported, Please report to the developer."
 fi
 
 ui_print "- It seems that your APN conf is at $APNCONFDIR"
