@@ -1,6 +1,6 @@
 SKIPUNZIP=0
 
-ui_print "- Unzip files..."
+ui_print "- Unziping files..."
 
 if [ -f "/etc/apns-conf.xml" ]; then
 	APNCONFDIR="/etc"
@@ -9,11 +9,11 @@ elif [ -f "/vendor/etc/apns-conf.xml" ]; then
 elif [ -f "/product/etc/apns-conf.xml" ]; then
 	APNCONFDIR="/system/product/etc"
 else
-	abort "- This operating system is not supported, Please report to the developer."
+	abort "- This rom is not supported, Please report to the developer."
 fi
 
 ui_print "- It seems that your APN conf is at $APNCONFDIR"
-ui_print "- If there are something wrong, please report"
+ui_print "- If there is something wrong, please report"
 [[ ! -f "$MODPATH/apns-conf.xml" ]] && unzip -qjo "$ZIPFILE" 'APN/*' -d $MODPATH >&2
 mkdir -p $MODPATH$APNCONFDIR
 [[ -f "$MODPATH/APN/apns-conf.xml" ]] && mv -f $MODPATH/APN/apns-conf.xml $MODPATH/apns-conf.xml
