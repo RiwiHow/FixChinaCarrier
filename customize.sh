@@ -14,16 +14,12 @@ else
 	abort "Unsupported system!"
 fi
 
-ui_print "It seems your APN conf at $APNCONFDIR"
+ui_print "It seems that your APN conf is at $APNCONFDIR"
 ui_print "If there is some wrong, please report"
-unzip -qjo "$ZIPFILE" 'APN/*' -d $MODPATH >&2
+[[ ! -f "$MODPATH/apns-conf.xml" ]] && unzip -qjo "$ZIPFILE" 'APN/*' -d $MODPATH >&2
 mkdir -p $MODPATH$APNCONFDIR
-cp $MODPATH/apns-conf.xml $MODPATH$APNCONFDIR
-
-# Delete unnecessary files
-rm -rf \
-$MODPATH/system/placeholder $MODPATH/customize.sh \
-$MODPATH/*.md $MODPATH/.git* $MODPATH/LICENSE 2>/dev/null
+[[ -f "$MODPATH/APN/apns-conf.xml" ]] && mv -f $MODPATH/APN/apns-conf.xml $MODPATH/apns-conf.xml
+mv -f $MODPATH/apns-conf.xml $MODPATH$APNCONFDIR
 
 # Set 
   set_perm_recursive $MODPATH 0 0 0755 0644
