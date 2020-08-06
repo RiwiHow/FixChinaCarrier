@@ -1,6 +1,4 @@
 SKIPUNZIP=0
-REPLACE="
-"
 
 ui_print "- Unziping module"
 
