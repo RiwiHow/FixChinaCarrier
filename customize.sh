@@ -6,14 +6,14 @@ if [ $MIUI ]; then
 	abort "- You don’t need to flash this module"
 fi
 
-if [ -f "/etc/apns-conf.xml" ]; then
-	APNCONFDIR="/etc"
+if [ -f "/system/etc/apns-conf.xml" ]; then
+	APNCONFDIR="/system/etc"
 elif [ -f "/vendor/etc/apns-conf.xml" ]; then
 	APNCONFDIR="/system/vendor/etc"
 elif [ -f "/product/etc/apns-conf.xml" ]; then
 	APNCONFDIR="/system/product/etc"
 else
-	abort "- This operating system is not supported, Please report to the developer."
+	abort "- This rom is not supported, Please report to the developer."
 fi
 
 ui_print "- It seems that your APN conf is at $APNCONFDIR"

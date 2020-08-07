@@ -4,7 +4,12 @@
 This is a Magisk module to solve the APN problem of the slow speed of China carrier in some roms.
 ## How to use?
 Just install it in Magisk Manager.
+
+**Note:You need to go to `Access Point Names (APN)` settings to `Reset to default` manually.**
 ## How it works?
 Replace the `apns-conf.xml` of your rom with MIUI's.
 ## Credits
 [Magisk](https://github.com/topjohnwu/Magisk)
+[huanruomengyun](https://github.com/huanruomengyun)
+落叶凄凉TEL
+[vvb2060](https://github.com/vvb2060)
