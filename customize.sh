@@ -3,7 +3,7 @@ SKIPUNZIP=0
 MIUI=$(grep_prop "ro.miui.ui.version.*")
 if [ $MIUI ]; then
 	ui_print "- MIUI Detected"
-	abort "- You don’t need to flash this module"
+	abort "- You don’t need to install this module"
 fi
 
 if [ -f "/system/etc/apns-conf.xml" ]; then
