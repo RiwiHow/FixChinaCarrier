@@ -10,6 +10,9 @@ Just install it in Magisk Manager.
 Replace the `apns-conf.xml` of your rom with MIUI's.
 ## Credits
 [Magisk](https://github.com/topjohnwu/Magisk)
+
 [huanruomengyun](https://github.com/huanruomengyun)
-落叶凄凉TEL
+
+[落叶凄凉TEL](http://www.coolapk.com/u/2277637)
+
 [vvb2060](https://github.com/vvb2060)
