@@ -8,3 +8,6 @@
 用 MIUI 的 `apns-conf.xml` 替换原本系统的。
 ## 感谢
 [Magisk](https://github.com/topjohnwu/Magisk)
+[huanruomengyun](https://github.com/huanruomengyun)
+落叶凄凉TEL
+[vvb2060](https://github.com/vvb2060)
