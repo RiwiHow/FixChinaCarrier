@@ -1,4 +1,4 @@
-# 文档
+# FixChinaCarrier
 这是一个 Magisk 模块，用来解决部分 ROM 中中国运营商的 APN 问题。
 ## 如何使用？
 在 Magisk Manager 中安装即可。
@@ -7,6 +7,7 @@
 
 **使用前**
 ![使用前](https://raw.githubusercontent.com/RiwiHow/FixChinaCarrier/master/Doc/images/4.png)
+
 **使用后**
 ![使用后](https://raw.githubusercontent.com/RiwiHow/FixChinaCarrier/master/Doc/images/2.png)
 ## 它是如何工作的？
