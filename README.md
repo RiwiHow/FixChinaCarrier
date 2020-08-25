@@ -17,7 +17,7 @@ Replace the `apns-conf.xml` of your rom with MIUI's.
 ## Credits
 * [Magisk](https://github.com/topjohnwu/Magisk)
 
-* [huanruomengyun](https://github.com/huanruomengyun)
+* [QingxuMo](https://github.com/QingxuMo)
 
 * [落叶凄凉TEL](http://www.coolapk.com/u/2277637)
 
