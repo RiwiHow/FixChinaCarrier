@@ -22,21 +22,21 @@ sp() {
 apn_place_choose() {
 	run_addons
 	sp
-	ui_print "Please use the volume keys to select"
-	ui_print "请用音量键进行选择"
-	ui_print "eg."
-	ui_print "示例:"
-	ui_print "Vol+ = true"
-	ui_print "音量+ = 是"
-	ui_print "Vol- = false"
-	ui_print "音量- = 否"
+	ui_print "- Please use the volume keys to select"
+	ui_print "  请用音量键进行选择"
+	ui_print "- eg."
+	ui_print "  示例:"
+	ui_print "- Vol+ = true"
+	ui_print "  音量+ = 是"
+	ui_print "- Vol- = false"
+	ui_print "  音量- = 否"
 	sp
-	ui_print "Do you want to replace apns_conf.xml in all directories? (This may cause some unknown issues)"
-	ui_print "您是否想替换所有目录的 apns_conf.xml？（这可能会造成某些未知的问题）"
-	ui_print "Vol+ = true"
-	ui_print "音量+ = 是"
-	ui_print "Vol- = false"
-	ui_print "音量- = 否"
+	ui_print "- Do you want to replace apns_conf.xml in all directories? (This may cause some unknown issues)"
+	ui_print "  您是否想替换所有目录的 apns_conf.xml？（这可能会造成某些未知的问题）"
+	ui_print "- Vol+ = true"
+	ui_print "  音量+ = 是"
+	ui_print "- Vol- = false"
+	ui_print "  音量- = 否"
 	if $VKSEL; then
 		REPLACEALL=true
 		return 0
@@ -44,33 +44,33 @@ apn_place_choose() {
 		REPLACEALL=false
 	fi
 	sp
-	ui_print "Please select the directory you want to replace"
-	ui_print "请选择您想要替换的目录"
+	ui_print "- Please select the directory you want to replace"
+	ui_print "  请选择您想要替换的目录"
 	bak=$IFS
 	IFS=$'\n'
 	for i in $(echo "$q");
 	do
 		sp
-		ui_print "Vol+ = $i"
-		ui_print "音量+ = $i"
-		ui_print "Vol- = Other directory"
-		ui_print "音量- = 其他目录"
+		ui_print "- Vol+ = $i"
+		ui_print "  音量+ = $i"
+		ui_print "- Vol- = Other directory"
+		ui_print "  音量- = 其他目录"
 		if $VKSEL; then
 			APNCONFDIR="$MODPATH/${i%/*}"
 			continue
 		else
 		    sp
-			ui_print "Please continue your selection"
-			ui_print "请继续您的选择"
+			ui_print "- Please continue your selection"
+			ui_print "  请继续您的选择"
 		fi
 	done
 	IFS=$bak
 	if [ -z $APNCONFDIR ]; then
 	sp
-	ui_print "The module has an internal error, the installation failed"
-	ui_print "模块出现内部错误, 安装失败"
-	ui_print "We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/apnconfdir-debug.log. You can choose whether to send the log to the developer after reading the log file."
-	ui_print "我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/apnconfdir-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
+	ui_print "- The module has an internal error, the installation failed"
+	ui_print "  模块出现内部错误, 安装失败"
+	ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/apnconfdir-debug.log. You can choose whether to send the log to the developer after reading the log file."
+	ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/apnconfdir-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
 	debug_log apnconfdir
 	abort
 	fi
@@ -218,10 +218,10 @@ prop_process() {
 q=$(find /system -name "apns-conf.xml" -type f)
 
 if [ -z "$q" ]; then
-	ui_print "This operating ROM is not supported."
-	ui_print "目标 ROM 不受支持！"
-	ui_print "We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/$MODID-debug.log. You can choose whether to send the log to the developer after reading the log file."
-	ui_print "我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/unsupportedrom-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
+	ui_print "- This operating ROM is not supported."
+	ui_print "  目标 ROM 不受支持！"
+	ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/$MODID-debug.log. You can choose whether to send the log to the developer after reading the log file."
+	ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/unsupportedrom-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
 	debug_log unsupportedrom
 	abort
 fi
@@ -230,16 +230,16 @@ MIUI=$(grep_prop "ro.miui.ui.version.*")
 MIUI_framework=$(pm list packages | grep com.xiaomi.xmsf)
 if [ $MIUI ]; then
 	if [ -z "$MIUI_framework" ]; then
-		ui_print "Warning! you don’t seem to be using MIUI, but MIUI_Version is found in Props."
-		ui_print "警告！您似乎并没有使用 MIUI，但是 Props 中出现了 MIUI 版本号。"
-		ui_print "We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/miui.log. You can choose whether to send the log to the developer after reading the log file."
-		ui_print "我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/miui-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
+		ui_print "- Warning! you don’t seem to be using MIUI, but MIUI_Version is found in Props."
+		ui_print "  警告！您似乎并没有使用 MIUI，但是 Props 中出现了 MIUI 版本号。"
+		ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/miui.log. You can choose whether to send the log to the developer after reading the log file."
+		ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/miui-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
 		debug_log miui
 	else
-		ui_print "MIUI Detected"
-		ui_print "检测到 MIUI"
-		ui_print "You don’t need to flash this module"
-		ui_print "您不需要刷入这个模块"
+		ui_print "- MIUI Detected"
+		ui_print "  检测到 MIUI"
+		ui_print "- You don’t need to flash this module"
+		ui_print "  您不需要刷入这个模块"
 		abort
 	fi
 fi
@@ -298,13 +298,13 @@ if [ -f $INFO ]; then
   rm -f $INFO
 fi
 
-ui_print "APN configuration file found in the following directory"
-ui_print "在以下目录发现 APN 配置文件"
-echo "$q"
+ui_print "- APN configuration file found in the following directory"
+ui_print "  在以下目录发现 APN 配置文件"
+echo "  $q"
 
 if [ $(echo "$q" | wc -l) -ge 2 ]; then
-	ui_print "Warning! APN profile found in multiple locations"
-	ui_print "警告！在多个目录发现 APN 配置文件！"
+	ui_print "- Warning! APN profile found in multiple locations"
+	ui_print "  警告！在多个目录发现 APN 配置文件！"
 	apn_place_choose
 else
 	REPLACEALL=true
@@ -315,7 +315,7 @@ ui_print "- Installing"
 
 [ -f "$MODPATH/common/install.sh" ] && . $MODPATH/common/install.sh
 
-ui_print "   Installing for $ARCH SDK $API device..."
+ui_print "  Installing for $ARCH SDK $API device..."
 # Remove comments from files and place them, add blank line to end if not already present
 for i in $(find $MODPATH -type f -name "*.sh" -o -name "*.prop" -o -name "*.rule"); do
   [ -f $i ] && { sed -i -e "/^#/d" -e "/^ *$/d" $i; [ "$(tail -1 $i)" ] && echo "" >> $i; } || continue
