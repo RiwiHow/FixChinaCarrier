@@ -101,7 +101,7 @@ debug_log() {
   LOGID=$1
   $BOOTMODE && local LOG=/storage/emulated/0/$LOGID-debug || local LOG=/data/media/0/$LOGID-debug
   echo "$LOGID" > $LOG-tmp.log
-  echo -e "***---Device Info---***" > $LOG-tmp.log
+  echo -e "***---Device Info---***" >> $LOG-tmp.log
   echo -e "\n---Props---\n" >> $LOG-tmp.log
   getprop >> $LOG-tmp.log
   echo -e "\n\n***---Magisk Info---***" >> $LOG-tmp.log
@@ -114,7 +114,7 @@ debug_log() {
   echo -e "\n---Installed Files---\n" >> $LOG-tmp.log
   grep "^+* cp_ch" $LOG.log | sed 's/.* //g' >> $LOG-tmp.log
   sed -i -e "\|$TMPDIR/|d" -e "\|$MODPATH|d" $LOG-tmp.log
-  find $MODPATH -type f > $LOG-tmp.log
+  find $MODPATH -type f >> $LOG-tmp.log
   echo -e "\n---Installed Boot Scripts---\n" >> $LOG-tmp.log
   grep "^+* install_script" $LOG.log | sed -e 's/.* //g' -e 's/^-.* //g' >> $LOG-tmp.log
   echo -e "\n---Installed Prop Files---\n" >> $LOG-tmp.log
