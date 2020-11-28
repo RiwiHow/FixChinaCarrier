@@ -62,7 +62,7 @@ case $(echo $(basename $ZIPFILE) | tr '[:upper:]' '[:lower:]') in
      else
        VKSEL=chooseportold
        ui_print "  ! Legacy device detected! Using old keycheck method"
-       ui_print "  ! 检测到远古设备！ 使用旧的音量键检查方法"
+       ui_print "  ! 检测到远古设备！ 使用旧式音量键检测方法"
        ui_print " "
        ui_print "- Vol Key Programming -"
        ui_print "  Press Vol Up Again:"
