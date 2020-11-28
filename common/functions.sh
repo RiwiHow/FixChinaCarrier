@@ -67,8 +67,10 @@ apn_place_choose() {
 	IFS=$bak
 	if [ -z $APNCONFDIR ]; then
 	sp
-	ui_print "- The module has an internal error, the installation failed"
-	ui_print "  模块出现内部错误, 安装失败"
+	ui_print "- The module has an internal error, the installation failed."
+	ui_print "  模块出现内部错误, 安装失败。"
+	ui_print "- This may be because you did not select a valid directory."
+	ui_print "  这可能是因为你始终未选择一个有效的目录。"
 	ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/apnconfdir-debug.log. You can choose whether to send the log to the developer after reading the log file."
 	ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/apnconfdir-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
 	debug_log apnconfdir
@@ -232,6 +234,10 @@ if [ $MIUI ]; then
 	if [ -z "$MIUI_framework" ]; then
 		ui_print "- Warning! you don’t seem to be using MIUI, but MIUI_Version is found in Props."
 		ui_print "  警告！您似乎并没有使用 MIUI，但是 Props 中出现了 MIUI 版本号。"
+		ui_print "- This may be due to the not standard behavior of the author of the ROM you are currently using."
+		ui_print "  这可能是由于您当前使用的 ROM 的作者的不规范行为。"
+		ui_print "- Or because you have disguised the model."
+		ui_print "  或者是因为你进行了机型伪装。"
 		ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/miui.log. You can choose whether to send the log to the developer after reading the log file."
 		ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/miui-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
 		debug_log miui
@@ -243,11 +249,6 @@ if [ $MIUI ]; then
 		abort
 	fi
 fi
-
-
-# Check for min/max api version
-[ -z $MINAPI ] || { [ $API -lt $MINAPI ] && abort "! Your system API of $API is less than the minimum api of $MINAPI! Aborting!"; }
-[ -z $MAXAPI ] || { [ $API -gt $MAXAPI ] && abort "! Your system API of $API is greater than the maximum api of $MAXAPI! Aborting!"; }
 
 # Set variables
 [ $API -lt 26 ] && DYNLIB=false
@@ -300,7 +301,11 @@ fi
 
 ui_print "- APN configuration file found in the following directory"
 ui_print "  在以下目录发现 APN 配置文件"
-echo "  $q"
+ui_print " "
+ui_print "============="
+ui_print "$q"
+ui_print "============="
+ui_print " "
 
 if [ $(echo "$q" | wc -l) -ge 2 ]; then
 	ui_print "- Warning! APN profile found in multiple locations"

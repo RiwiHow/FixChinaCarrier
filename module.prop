@@ -1,6 +1,6 @@
 id=fixchinacarrier
 name=FixChinaCarrier
-version=v5.1.1
-versionCode=20200907
+version=v5.1.2
+versionCode=20201128
 author=Qingxu & RiwiHow
-description=A Magisk module to solve the APN problem of the slow speed of China carrier in some roms.
+description=A Magisk module to solve the APN problem of the slow speed of China carrier in some ROMs.
