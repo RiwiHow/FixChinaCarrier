@@ -19,9 +19,8 @@ sp() {
 	ui_print " "
 }
 
-apn_place_choose() {
-	run_addons
-	sp
+addons_example() {
+    sp
 	ui_print "- Please use the volume keys to select"
 	ui_print "  请用音量键进行选择"
 	ui_print "- eg."
@@ -30,6 +29,18 @@ apn_place_choose() {
 	ui_print "  音量+ = 是"
 	ui_print "- Vol- = false"
 	ui_print "  音量- = 否"
+}
+
+apn_place_choose() {
+	run_addons
+	addons_enable=true
+    addons_example
+	if $VKSEL; then
+		REPLACEALL=true
+		return 0
+	else
+		REPLACEALL=false
+	fi
 	sp
 	ui_print "- Do you want to replace apns_conf.xml in all directories? (This may cause some unknown issues)"
 	ui_print "  您是否想替换所有目录的 apns_conf.xml？（这可能会造成某些未知的问题）"
@@ -37,12 +48,6 @@ apn_place_choose() {
 	ui_print "  音量+ = 是"
 	ui_print "- Vol- = false"
 	ui_print "  音量- = 否"
-	if $VKSEL; then
-		REPLACEALL=true
-		return 0
-	else
-		REPLACEALL=false
-	fi
 	sp
 	ui_print "- Please select the directory you want to replace"
 	ui_print "  请选择您想要替换的目录"
@@ -56,7 +61,7 @@ apn_place_choose() {
 		ui_print "- Vol- = Other directory"
 		ui_print "  音量- = 其他目录"
 		if $VKSEL; then
-			APNCONFDIR="$MODPATH/${i%/*}"
+			APNCONFDIR="$MODPATH/$i"
 			return 0
 		else
 		    sp
@@ -69,7 +74,7 @@ apn_place_choose() {
 	sp
 	ui_print "- The module has an internal error, the installation failed."
 	ui_print "  模块出现内部错误, 安装失败。"
-	ui_print "- This may be because you did not select a valid directory."
+	ui_print "  This may be because you did not select a valid directory."
 	ui_print "  这可能是因为你始终未选择一个有效的目录。"
 	ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/apnconfdir-debug.log. You can choose whether to send the log to the developer after reading the log file."
 	ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/apnconfdir-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
@@ -234,9 +239,9 @@ if [ $MIUI ]; then
 	if [ -z "$MIUI_framework" ]; then
 		ui_print "- Warning! you don’t seem to be using MIUI, but MIUI_Version is found in Props."
 		ui_print "  警告！您似乎并没有使用 MIUI，但是 Props 中出现了 MIUI 版本号。"
-		ui_print "- This may be due to the not standard behavior of the author of the ROM you are currently using."
+		ui_print "  This may be due to the not standard behavior of the author of the ROM you are currently using."
 		ui_print "  这可能是由于您当前使用的 ROM 的作者的不规范行为。"
-		ui_print "- Or because you have disguised the model."
+		ui_print "  Or because you have disguised the model."
 		ui_print "  或者是因为你进行了机型伪装。"
 		ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/miui.log. You can choose whether to send the log to the developer after reading the log file."
 		ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/miui-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
@@ -308,11 +313,33 @@ ui_print "============="
 ui_print " "
 
 if [ $(echo "$q" | wc -l) -ge 2 ]; then
-	ui_print "- Warning! APN profile found in multiple locations"
+	ui_print "- Warning! APN profile found in multiple locations!"
 	ui_print "  警告！在多个目录发现 APN 配置文件！"
 	apn_place_choose
 else
 	REPLACEALL=true
+fi
+
+if [ -f /system/product/priv-app/CarrierSettings/CarrierSettings.apk ]; then
+  ui_print "- Warning! Google's CarrierSettings is found!"
+  ui_print "  警告！发现谷歌的运营商设置！"
+  [[ -z "$addons_enable" ]] && run_addons && addons_example
+  ui_print "  Some ROMs may use Google's CarrierSettings to override the APN config."
+  ui_print "  某些 ROM 可能会使用谷歌的运营商设置覆盖默认的配置文件。"
+  ui_print "  It means you might need to uninstall Google's CarrierSettings to modify your APN config."
+  ui_print "  这意味着您也许需要卸载谷歌的运营商设置才能修改您的 APN 配置。"
+  ui_print "  Do you want to uninstall Google's CarrierSettings? (This may cause some unknown issues)"
+  ui_print "  您是否想卸载谷歌的运营商设置？(这可能会造成某些未知的问题)"
+  ui_print "- Vol+ = true"
+  ui_print "  音量+ = 是"
+  ui_print "- Vol- = false"
+  ui_print "  音量- = 否"
+  sp
+	if $VKSEL; then
+		UNINSTALLCARRIERSETTINGS=true
+	else
+		UNINSTALLCARRIERSETTINGS=false
+	fi
 fi
 
 ### Install
