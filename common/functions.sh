@@ -61,7 +61,7 @@ apn_place_choose() {
 		ui_print "- Vol- = Other directory"
 		ui_print "  音量- = 其他目录"
 		if $VKSEL; then
-			APNCONFDIR="$MODPATH/$i"
+			APNCONFDIR="$MODPATH/${i%/*}"
 			return 0
 		else
 		    sp
