@@ -8,12 +8,15 @@ if [ $REPLACEALL = "true" ]; then
 		fi
 	done
 	rm -f $MODPATH/APN/apns-conf.xml
-fi
-
-if [ ! -z $APNCONFDIR ]; then
+elif [ -n $APNCONFDIR ]; then
 	mkdir -p $APNCONFDIR
 	cp $MODPATH/APN/apns-conf.xml $APNCONFDIR
 	rm -f $MODPATH/APN/apns-conf.xml
+fi
+
+if [ $UNINSTALLCARRIERSETTINGS = "true" ]; then
+  mkdir -p $MODPATH/system/product/priv-app/CarrierSettings
+  touch $MODPATH/system/product/priv-app/CarrierSettings/.replace
 fi
 
 # Remove stuffs that don't belong to modules
