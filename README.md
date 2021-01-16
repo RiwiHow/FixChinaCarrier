@@ -17,8 +17,10 @@ Replace the `apns-conf.xml` of your rom with MIUI's.
 ## Credits
 * [Magisk](https://github.com/topjohnwu/Magisk)
 
-* [QingxuMo](https://github.com/QingxuMo)
+* [QingxuMo](https://github.com/QingxuMo) for most works
 
-* [落叶凄凉TEL](http://www.coolapk.com/u/2277637)
+* [落叶凄凉TEL](http://www.coolapk.com/u/2277637) for basic works
 
-* [vvb2060](https://github.com/vvb2060)
+* [vvb2060](https://github.com/vvb2060) for [it](https://github.com/RiwiHow/FixChinaCarrier/commit/3a8c1aa5ae17d424b103a541dc85f837f30a14fa)
+
+* [Zackptg5](https://forum.xda-developers.com/m/zackptg5.6037748/) for Magisk module template

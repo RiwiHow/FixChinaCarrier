@@ -15,8 +15,10 @@
 ## 感谢
 * [Magisk](https://github.com/topjohnwu/Magisk)
 
-* [QingxuMo](https://github.com/QingxuMo)
+* [QingxuMo](https://github.com/QingxuMo)：模块的大多数工作
 
-* [落叶凄凉TEL](http://www.coolapk.com/u/2277637)
+* [落叶凄凉TEL](http://www.coolapk.com/u/2277637)：基本工作
 
-* [vvb2060](https://github.com/vvb2060)
+* [vvb2060](https://github.com/vvb2060)：解决了[这个](https://github.com/RiwiHow/FixChinaCarrier/commit/3a8c1aa5ae17d424b103a541dc85f837f30a14fa)
+
+* [Zackptg5](https://forum.xda-developers.com/m/zackptg5.6037748/)：模块模板
