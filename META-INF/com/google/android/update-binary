@@ -30,9 +30,9 @@ is_legacy_script() {
 
 print_modname() {
   local len
-  len=`echo -n $MODNAME | wc -c`
+  len=$(echo -n $MODNAME | wc -c)
   len=$((len + 2))
-  local pounds=`printf "%${len}s" | tr ' ' '*'`
+  local pounds=$(printf "%${len}s" | tr ' ' '*')
   ui_print "$pounds"
   ui_print " $MODNAME "
   ui_print "$pounds"
@@ -77,9 +77,9 @@ unzip -o "$ZIPFILE" module.prop -d $TMPDIR >&2
 
 $BOOTMODE && MODDIRNAME=modules_update || MODDIRNAME=modules
 MODULEROOT=$NVBASE/$MODDIRNAME
-MODID=`grep_prop id $TMPDIR/module.prop`
+MODID=$(grep_prop id $TMPDIR/module.prop)
 MODPATH=$MODULEROOT/$MODID
-MODNAME=`grep_prop name $TMPDIR/module.prop`
+MODNAME=$(grep_prop name $TMPDIR/module.prop)
 
 # Create mod paths
 rm -rf $MODPATH 2>/dev/null
@@ -158,8 +158,8 @@ fi
 
 # Remove stuffs that don't belong to modules
 rm -rf \
-$MODPATH/system/placeholder $MODPATH/customize.sh \
-$MODPATH/README.md $MODPATH/.git* 2>/dev/null
+  $MODPATH/system/placeholder $MODPATH/customize.sh \
+  $MODPATH/README.md $MODPATH/.git* 2>/dev/null
 
 ##############
 # Finalizing
