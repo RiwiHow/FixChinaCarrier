@@ -1,5 +1,5 @@
 if [ $REPLACEALL = "true" ]; then
-	for i in $(find /system -name "apns-conf.xml" -type f); do
+	for i in "$q"; do
 		APNCONFDIR="$MODPATH/${i%/*}"
 		if [[ ! -d "$APNCONFDIR" ]]; then
 			mkdir -p "$APNCONFDIR"

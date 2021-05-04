@@ -226,18 +226,7 @@ prop_process() {
   done <$1
 }
 
-# Check available
-q=$(find /system -name "apns-conf.xml" -type f)
-
-if [ -z "$q" ]; then
-  ui_print "- This operating ROM is not supported."
-  ui_print "  目标 ROM 不受支持！"
-  ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/$MODID-debug.log. You can choose whether to send the log to the developer after reading the log file."
-  ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/unsupportedrom-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
-  debug_log unsupportedrom
-  abort
-fi
-
+# Check MIUI
 MIUI=$(grep_prop "ro.miui.ui.version.*")
 MIUI_framework=$(pm list packages | grep com.xiaomi.xmsf)
 if [ $MIUI ]; then
@@ -258,6 +247,26 @@ if [ $MIUI ]; then
     ui_print "  您不需要刷入这个模块"
     abort
   fi
+fi
+
+# Check available
+detect_system=$(find /system -name "apns-conf.xml" -type f)
+extra_detect_product=$(find /product -name "apns-conf.xml" -type f)
+extra_detect_etc=$(find /etc -name "apns-conf.xml" -type f)
+
+if [ -n "$detect_system" ]; then
+  q="$detect_system"
+elif [ -n "$extra_detect_product"]; then
+  q="$extra_detect_product"
+elif [ -n "$extra_detect_etc"]; then
+  q="$extra_detect_etc"
+else
+  ui_print "- This operating ROM is not supported."
+  ui_print "  目标 ROM 不受支持！"
+  ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/$MODID-debug.log. You can choose whether to send the log to the developer after reading the log file."
+  ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/unsupportedrom-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
+  debug_log unsupportedrom
+  abort
 fi
 
 # Set variables
@@ -308,14 +317,6 @@ if [ -f $INFO ]; then
   done <$INFO
   rm -f $INFO
 fi
-
-ui_print "- APN configuration file found in the following directory"
-ui_print "  在以下目录发现 APN 配置文件"
-ui_print " "
-ui_print "============="
-ui_print "$q"
-ui_print "============="
-ui_print " "
 
 if [ $(echo "$q" | wc -l) -ge 2 ]; then
   ui_print "- Warning! APN profile found in multiple locations!"
