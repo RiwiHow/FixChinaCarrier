@@ -28,3 +28,5 @@ function logcat_process() {
     echo "$(cat $LOG.log)" >>$LOG-tmp.log
     mv -f $LOG-tmp.log $LOG.log
 }
+
+logcat_process
