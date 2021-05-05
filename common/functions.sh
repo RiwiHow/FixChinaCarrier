@@ -318,6 +318,14 @@ if [ -f $INFO ]; then
   rm -f $INFO
 fi
 
+ui_print "- APN configuration file found in the following directory"
+ui_print "  在以下目录发现 APN 配置文件"
+ui_print " "
+ui_print "============="
+ui_print "$q"
+ui_print "============="
+ui_print " "
+
 if [ $(echo "$q" | wc -l) -ge 2 ]; then
   ui_print "- Warning! APN profile found in multiple locations!"
   ui_print "  警告！在多个目录发现 APN 配置文件！"
