@@ -1,6 +1,6 @@
 if [ "$REPLACEALL" = "true" ]; then
 	for i in "$(echo "$q" | awk '{printf "%s",$1}'| sed 's/ //g')"; do
-		APNCONFDIR="$MODPATH/$i"
+		APNCONFDIR="$MODPATH/${i%/*}"
 		if [[ ! -d "$APNCONFDIR" ]]; then
 			mkdir -p "$APNCONFDIR"
 			cp "$MODPATH"/APN/apns-conf.xml "$APNCONFDIR"
