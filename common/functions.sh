@@ -74,9 +74,9 @@ apn_place_choose() {
     ui_print "  模块出现内部错误, 安装失败。"
     ui_print "- This may be because you did not select a valid directory."
     ui_print "  这可能是因为你始终未选择一个有效的目录。"
-    ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/apnconfdir-debug.log. You can choose whether to send the log to the developer after reading the log file."
-    ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/apnconfdir-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
-    debug_log apnconfdir
+    ui_print "- We hope to collect some information to help us confirm the problem. You can click the save button in the upper right corner and decide whether to send the log to the developer after reading the log file."
+    ui_print "  我们希望收集一些信息以帮助我们确认这个问题。您可以点击右上角的保存按钮并在阅读 log 后选择是否发送 log 给开发者。"
+    _Error="apnconfdir"
     abort
   fi
 }
@@ -93,21 +93,7 @@ run_addons() {
 }
 
 cleanup() {
-  $BOOTMODE || {
-    umount_apex
-    recovery_cleanup
-  }
   rm -rf $MODPATH/common 2>/dev/null
-  ui_print " "
-  ui_print "    **************************************"
-  ui_print "    *   MMT Extended by Zackptg5 @ XDA   *"
-  ui_print "    **************************************"
-  ui_print " "
-  rm -rf $TMPDIR 2>/dev/null
-}
-
-debug_log() {
-  . $MODPATH/common/debug.sh
 }
 
 device_check() {
@@ -136,6 +122,7 @@ device_check() {
       for j in "ro.product.$type" "ro.build.$type" "ro.product.vendor.$type" "ro.vendor.product.$type"; do
         [ "$(sed -n "s/^$j=//p" $i/build.prop 2>/dev/null | head -n 1 | tr '[:upper:]' '[:lower:]')" == "$prop" ] && return 0
       done
+      [ "$type" == "device" ] && [ "$(sed -n "s/^"ro.build.product"=//p" $i/build.prop 2>/dev/null | head -n 1 | tr '[:upper:]' '[:lower:]')" == "$prop" ] && return 0
     fi
   done
   return 1
@@ -237,9 +224,9 @@ if [ $MIUI ]; then
     ui_print "  这可能是由于您当前使用的 ROM 的作者的不规范行为。"
     ui_print "- Or because you have disguised the model."
     ui_print "  或者是因为你进行了机型伪装。"
-    ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/miui.log. You can choose whether to send the log to the developer after reading the log file."
-    ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/miui-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
-    debug_log miui
+    ui_print "- We hope to collect some information to help us confirm the problem. You can click the save button in the upper right corner and decide whether to send the log to the developer after reading the log file."
+    ui_print "  我们希望收集一些信息以帮助我们确认这个问题。您可以点击右上角的保存按钮并在阅读 log 后选择是否发送 log 给开发者。"
+    _Error="miui"
   else
     ui_print "- MIUI Detected"
     ui_print "  检测到 MIUI"
@@ -263,17 +250,26 @@ elif [ -n "$extra_detect_etc"]; then
 else
   ui_print "- This operating ROM is not supported."
   ui_print "  目标 ROM 不受支持！"
-  ui_print "- We hope to collect some information to help us. To confirm the problem, the collected information will be output to /sdcard/$MODID-debug.log. You can choose whether to send the log to the developer after reading the log file."
-  ui_print "  我们希望收集一些信息以帮助我们确认这个问题，收集的信息将会输出到 /sdcard/unsupportedrom-debug.log。您可以在阅读 log 后选择是否发送 log 给开发者。"
-  debug_log unsupportedrom
+  ui_print "- We hope to collect some information to help us confirm the problem. You can click the save button in the upper right corner and decide whether to send the log to the developer after reading the log file."
+  ui_print "  我们希望收集一些信息以帮助我们确认这个问题。您可以点击右上角的保存按钮并在阅读 log 后选择是否发送 log 给开发者。"
+  _Error="unsupportedrom"
   abort
 fi
+
+# Credits
+ui_print "**************************************"
+ui_print "*   MMT Extended by Zackptg5 @ XDA   *"
+ui_print "**************************************"
+ui_print " "
+
+# Check for min/max api version
+[ -z $MINAPI ] || { [ $API -lt $MINAPI ] && abort "! Your system API of $API is less than the minimum api of $MINAPI! Aborting!"; }
+[ -z $MAXAPI ] || { [ $API -gt $MAXAPI ] && abort "! Your system API of $API is greater than the maximum api of $MAXAPI! Aborting!"; }
 
 # Set variables
 [ $API -lt 26 ] && DYNLIB=false
 [ -z $DYNLIB ] && DYNLIB=false
 [ -z $DEBUG ] && DEBUG=false
-[ -e "$PERSISTDIR" ] && PERSISTMOD=$PERSISTDIR/magisk/$MODID
 INFO=$NVBASE/modules/.$MODID-files
 ORIGDIR="$MAGISKTMP/mirror"
 if $DYNLIB; then
@@ -294,9 +290,22 @@ if ! $BOOTMODE; then
   exit 0
 fi
 
+# Debug
+if $DEBUG; then
+  ui_print "- Debug mode"
+  ui_print "  Debug mode is now enabled by default"
+  ui_print "  Debug 模式现设为默认开启"
+  ui_print "  Module install log will include debug info"
+  ui_print "  模块安装日志将包含 debug 信息"
+  ui_print "  If you need it, be sure to save it after module install"
+  ui_print "  如果你需要日志，请在模块安装后保存它"
+  set -x
+fi
+
 # Extract files
 ui_print "- Extracting module files"
 unzip -o "$ZIPFILE" -x 'META-INF/*' 'common/functions.sh' -d $MODPATH >&2
+[ -f "$MODPATH/common/addon.tar.xz" ] && tar -xf $MODPATH/common/addon.tar.xz -C $MODPATH/common 2>/dev/null
 
 # Remove files outside of module directory
 ui_print "- Removing old files"
@@ -361,7 +370,7 @@ ui_print "- Installing"
 
 [ -f "$MODPATH/common/install.sh" ] && . $MODPATH/common/install.sh
 
-ui_print "  Installing for $ARCH SDK $API device..."
+ui_print "   Installing for $ARCH SDK $API device..."
 # Remove comments from files and place them, add blank line to end if not already present
 for i in $(find $MODPATH -type f -name "*.sh" -o -name "*.prop" -o -name "*.rule"); do
   [ -f $i ] && {
