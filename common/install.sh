@@ -1,17 +1,20 @@
+_bak=$IFS
+IFS=$'\n'
+
 if [ "$REPLACEALL" = "true" ]; then
-	for i in "$(echo "$q" | awk '{printf "%s",$1}'| sed 's/ //g')"; do
-		APNCONFDIR="$MODPATH/${i%/*}"
+	for i in $q; do
+		APNCONFDIR="$MODPATH""${i%/*}"
 		if [[ ! -d "$APNCONFDIR" ]]; then
 			mkdir -p "$APNCONFDIR"
 			cp "$MODPATH"/APN/apns-conf.xml "$APNCONFDIR"
 		fi
 	done
-	rm -f "$MODPATH"/APN/apns-conf.xml
 elif [ -n "$APNCONFDIR" ]; then
 	mkdir -p "$APNCONFDIR"
 	cp "$MODPATH"/APN/apns-conf.xml "$APNCONFDIR"
-	rm -f "$MODPATH"/APN/apns-conf.xml
 fi
+
+IFS=$_bak
 
 if [ "$UNINSTALLCARRIERSETTINGS" = "true" ]; then
 	mkdir -p "$MODPATH"/system/product/priv-app/CarrierSettings

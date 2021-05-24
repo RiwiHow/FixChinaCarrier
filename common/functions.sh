@@ -34,12 +34,6 @@ apn_place_choose() {
   run_addons
   addons_enable=true
   addons_example
-  if $VKSEL; then
-    REPLACEALL=true
-    return 0
-  else
-    REPLACEALL=false
-  fi
   sp
   ui_print "- Do you want to replace apns_conf.xml in all directories? (This may cause some unknown issues)"
   ui_print "  您是否想替换所有目录的 apns_conf.xml？（这可能会造成某些未知的问题）"
@@ -47,19 +41,25 @@ apn_place_choose() {
   ui_print "  音量+ = 是"
   ui_print "- Vol- = false"
   ui_print "  音量- = 否"
+  if $VKSEL; then
+    REPLACEALL=true
+    return 0
+  else
+    REPLACEALL=false
+  fi
   sp
   ui_print "- Please select the directory you want to replace"
   ui_print "  请选择您想要替换的目录"
-  bak=$IFS
+  _bak=$IFS
   IFS=$'\n'
-  for i in $(echo "$q"); do
+  for i in $q; do
     sp
     ui_print "- Vol+ = $i"
     ui_print "  音量+ = $i"
     ui_print "- Vol- = Other directory"
     ui_print "  音量- = 其他目录"
     if $VKSEL; then
-      APNCONFDIR="$MODPATH/${i%/*}"
+      APNCONFDIR="$MODPATH""${i%/*}"
       return 0
     else
       sp
@@ -67,7 +67,7 @@ apn_place_choose() {
       ui_print "  请继续您的选择"
     fi
   done
-  IFS=$bak
+  IFS=$_bak
   if [ -z $APNCONFDIR ]; then
     sp
     ui_print "- The module has an internal error, the installation failed."
@@ -293,11 +293,11 @@ fi
 # Debug
 if $DEBUG; then
   ui_print "- Debug mode"
-  ui_print "  Debug mode is now enabled by default"
+  ui_print "* Debug mode is now enabled by default"
   ui_print "  Debug 模式现设为默认开启"
-  ui_print "  Module install log will include debug info"
+  ui_print "* Module install log will include debug info"
   ui_print "  模块安装日志将包含 debug 信息"
-  ui_print "  If you need it, be sure to save it after module install"
+  ui_print "* If you need it, be sure to save it after module install"
   ui_print "  如果你需要日志，请在模块安装后保存它"
   set -x
 fi
@@ -370,7 +370,7 @@ ui_print "- Installing"
 
 [ -f "$MODPATH/common/install.sh" ] && . $MODPATH/common/install.sh
 
-ui_print "   Installing for $ARCH SDK $API device..."
+ui_print "  Installing for $ARCH SDK $API device..."
 # Remove comments from files and place them, add blank line to end if not already present
 for i in $(find $MODPATH -type f -name "*.sh" -o -name "*.prop" -o -name "*.rule"); do
   [ -f $i ] && {
