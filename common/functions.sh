@@ -300,6 +300,7 @@ if $DEBUG; then
   ui_print "* If you need it, be sure to save it after module install"
   ui_print "  如果你需要日志，请在模块安装后保存它"
   set -x
+  sp
 fi
 
 # Extract files
