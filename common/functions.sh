@@ -243,10 +243,10 @@ extra_detect_etc=$(find /etc -name "apns-conf.xml" -type f)
 
 if [ -n "$detect_system" ]; then
   q="$detect_system"
-elif [ -n "$extra_detect_product"]; then
-  q="$extra_detect_product"
-elif [ -n "$extra_detect_etc"]; then
-  q="$extra_detect_etc"
+elif [ -n "$extra_detect_product" ]; then
+  q="/system$extra_detect_product"
+elif [ -n "$extra_detect_etc" ]; then
+  q="/system$extra_detect_etc"
 else
   ui_print "- This operating ROM is not supported."
   ui_print "  目标 ROM 不受支持！"
