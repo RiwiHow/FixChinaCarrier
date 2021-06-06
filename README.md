@@ -23,7 +23,7 @@ Download it from [releases](https://github.com/RiwiHow/FixChinaCarrier/releases)
 
 After that, go to `Access Point Names (APN)` settings to `Reset to default` manually.
 
-Example as blow:
+Example as below:
 
 <details>
 <summary>Before using</summary>
