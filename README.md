@@ -1,26 +1,60 @@
 # FixChinaCarrier
+English
+
 [简体中文](https://github.com/RiwiHow/FixChinaCarrier/blob/master/Doc/Chinese%20Simplified.md)
 
-This is a Magisk module to solve the APN problem of the slow speed of China carrier in some roms.
-## How to use?
-Just install it in Magisk Manager.
+## Features
 
-**Note:You need to go to `Access Point Names (APN)` settings to `Reset to default` manually.**
+- Solve the low speed of Chinese carriers
+- Systemless methods to replace
+- Multiple flexible modifications support
 
-**Before using**
-![Before using](https://raw.githubusercontent.com/RiwiHow/FixChinaCarrier/master/Doc/images/3.png)
-
-**After using**
-![After using](https://raw.githubusercontent.com/RiwiHow/FixChinaCarrier/master/Doc/images/1.png)
 ## How it works?
-Replace the `apns-conf.xml` of your rom with MIUI's.
+
+The module replaces the system's original `apns-conf.xml` by MIUI's via Magisk's [Magic Mount](https://topjohnwu.github.io/Magisk/details.html#magic-mount).
+
+## Requestents
+
+- Android 8+ and use `apns-conf.xml` as device's APN configuration file.
+- Magisk 20.4+ with installed manager
+
+## How to use it?
+Download it from [releases](https://github.com/RiwiHow/FixChinaCarrier/releases) and the install it in Magisk Manager.
+
+After that, go to `Access Point Names (APN)` settings to `Reset to default` manually.
+
+Example as blow:
+
+<details>
+<summary>Before using</summary>
+<img src="Doc/images/3.png">
+</details>
+
+<details>
+<summary>After using</summary>
+<img src="Doc/images/1.png">
+</details>
+## Troubleshooting
+
+#### Install failed with "Upzip error"
+
+Please download the module again and ensure the download process complete.
+
+#### I install it but there is only a blank directory in `/data/adb/modules/fixchinacarrier`
+
+It might because you upgrade to newer version from the old version. Install it in Magisk Manager again can solve the problem.
+
+#### Install failed! It tells me "The ROM is not supported".
+
+As it said, the ROM you using is not supported by now. You can open a issue with a detailed descriptiona and install log or submit your pull request to slove it. 
+
 ## Credits
-* [Magisk](https://github.com/topjohnwu/Magisk)
 
-* [QingxuMo](https://github.com/QingxuMo) for most works
+* [Magisk](https://github.com/topjohnwu/Magisk) provides tools
 
-* [落叶凄凉TEL](http://www.coolapk.com/u/2277637) for basic works
+* [Qingxu](https://github.com/RimuruW) for code works
 
-* [vvb2060](https://github.com/vvb2060) for [it](https://github.com/RiwiHow/FixChinaCarrier/commit/3a8c1aa5ae17d424b103a541dc85f837f30a14fa)
+* [vvb2060](https://github.com/vvb2060) and [落叶凄凉TEL](http://www.coolapk.com/u/2277637) provide guidances for us
 
-* [Zackptg5](https://forum.xda-developers.com/m/zackptg5.6037748/) for Magisk module template
+* [Zackptg5](https://forum.xda-developers.com/m/zackptg5.6037748/) provide the Magisk module template
+
