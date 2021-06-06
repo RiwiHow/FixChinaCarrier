@@ -13,7 +13,7 @@ English
 
 The module replaces the system's original `apns-conf.xml` by MIUI's via Magisk's [Magic Mount](https://topjohnwu.github.io/Magisk/details.html#magic-mount).
 
-## Requestents
+## Requestments
 
 - Android 8+ and use `apns-conf.xml` as device's APN configuration file.
 - Magisk 20.4+ with installed manager
