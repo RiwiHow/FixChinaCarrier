@@ -47,7 +47,7 @@ It might because you upgrade to newer version from the old version. Install it i
 
 #### Install failed! It tells me "The ROM is not supported".
 
-As it said, the ROM you using is not supported by now. You can open a issue with a detailed descriptiona and install log or submit your pull request to slove it. 
+As it said, the ROM you using is not supported by now. You can open a issue with a detailed description and install log or submit your pull request to slove it. 
 
 ## Credits
 
