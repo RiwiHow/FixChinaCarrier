@@ -21,7 +21,7 @@
 ## 使用方法
 从 [releases](https://github.com/RiwiHow/FixChinaCarrier/releases) 下载模块并在 Magisk Manger 安装。
 
-然后在设置的`接入点名称(APN)`  选择`重置为默认` 
+然后在设置的`接入点名称(APN)`选择`重置为默认`。
 
 如下所示：
 

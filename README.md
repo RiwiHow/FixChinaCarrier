@@ -15,11 +15,11 @@ The module replaces the system's original `apns-conf.xml` with MIUI's version us
 
 ## Requestments
 
-- Android 8 or higher and use `apns-conf.xml` as the device's APN configuration file.
-- Magisk 20.4 or higher with the manager installed.
+- Android 8 or higher and use `apns-conf.xml` as the device's APN configuration file
+- Magisk 20.4 or higher with the manager installed
 
 ## How to use it?
-Download the module from [releases](https://github.com/RiwiHow/FixChinaCarrier/releases) and install it through Magisk Manager..
+Download the module from [releases](https://github.com/RiwiHow/FixChinaCarrier/releases) and install it through Magisk Manager.
 
 After installation, go to the `Access Point Names (APN)` settings and manually `Reset to default`.
 
@@ -51,11 +51,11 @@ As the message indicates, the ROM you are using is currently not supported. You 
 
 ## Credits
 
-* [Magisk](https://github.com/topjohnwu/Magisk) for providing the tools.
+* [Magisk](https://github.com/topjohnwu/Magisk) for providing the tools
 
-* [Qingxu](https://github.com/RimuruW) for code work.
+* [Qingxu](https://github.com/RimuruW) for code work
 
-* [vvb2060](https://github.com/vvb2060) and [落叶凄凉TEL](http://www.coolapk.com/u/2277637) for provide guidances.
+* [vvb2060](https://github.com/vvb2060) and [落叶凄凉TEL](http://www.coolapk.com/u/2277637) for provide guidances
 
-* [Zackptg5](https://forum.xda-developers.com/m/zackptg5.6037748/) for providing the Magisk module template.
+* [Zackptg5](https://forum.xda-developers.com/m/zackptg5.6037748/) for providing the Magisk module template
 
